@@ -10,7 +10,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Create a new vehicle
 func CreateVehicle(c *gin.Context) {
 	var vehicle models.ElectricVehicle
 	if err := c.ShouldBindJSON(&vehicle); err != nil {
@@ -27,7 +26,6 @@ func CreateVehicle(c *gin.Context) {
 	c.JSON(http.StatusCreated, vehicle)
 }
 
-// Retrieve all vehicles
 func GetVehicles(c *gin.Context) {
 	rows, err := db.DB.Query(context.Background(), `SELECT id, make, model, year, battery_capacity, range_km, price FROM electric_vehicles`)
 	if err != nil {
@@ -48,7 +46,6 @@ func GetVehicles(c *gin.Context) {
 	c.JSON(http.StatusOK, vehicles)
 }
 
-// Retrieve a single vehicle by ID
 func GetVehicle(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -66,7 +63,6 @@ func GetVehicle(c *gin.Context) {
 	c.JSON(http.StatusOK, vehicle)
 }
 
-// Update a vehicle by ID
 func UpdateVehicle(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -90,7 +86,6 @@ func UpdateVehicle(c *gin.Context) {
 	c.JSON(http.StatusOK, vehicle)
 }
 
-// Delete a vehicle by ID
 func DeleteVehicle(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
